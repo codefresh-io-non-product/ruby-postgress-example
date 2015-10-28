@@ -26,6 +26,6 @@ COPY ./ /usr/app/dir/
 COPY start.sh /opt/codefresh/
 RUN chmod +x /opt/codefresh/*.sh
 
-EXPOSE 3000
+EXPOSE 8081
 
 CMD bash -il /opt/codefresh/start.sh
