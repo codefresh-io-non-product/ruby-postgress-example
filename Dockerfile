@@ -19,12 +19,7 @@ COPY ./ /usr/app/dir/
 COPY start.sh /opt/codefresh/
 RUN chmod +x /opt/codefresh/*.sh
 
-##================================== sh scripts ==================================
-
-EXPOSE 8080
 EXPOSE 8081
-
-#================================================
 
 #CMD ["bash -il /user/app/dir"]
 CMD bash -il /opt/codefresh/start.sh
