@@ -10,5 +10,6 @@ RUBYVERSION="$(rbenv install --list | grep "^  $RUBYVERSIONNUMBER" | tail -1)"
 rbenv install $RUBYVERSION --skip-existing
 rbenv local $RUBYVERSION
 
+ruby /opt/codefresh/prepare_project.rb
 gem install bundle
 bundle install -j4
