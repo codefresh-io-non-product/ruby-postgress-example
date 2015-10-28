@@ -1,21 +1,30 @@
 FROM codefresh/buildpacks:rails-postgres
 
-ADD ./ /usr/app/dir/
-
-ADD start.sh /opt/codefresh/
-ADD build.sh /opt/codefresh/
-RUN chmod +x /opt/codefresh/*.sh
-
 WORKDIR /usr/app/dir/
 
+COPY ./Gemfile /usr/app/dir/Gemfile
+COPY ./build.sh /opt/codefresh/build.sh
 RUN \
     bash -il /opt/codefresh/build.sh
 
-# ================================== sh scripts ==================================
+
+
+COPY ./db /usr/app/dir/db
+COPY ./Rakefile /usr/app/dir/Rakefile
+COPY ./config /usr/app/dir/config
+RUN \
+    bash -il /opt/codefresh/buildDb.sh
+
+COPY ./ /usr/app/dir/
+
+COPY start.sh /opt/codefresh/
+RUN chmod +x /opt/codefresh/*.sh
+
+##================================== sh scripts ==================================
 
 EXPOSE 8080
 EXPOSE 8081
 
-================================================
-
+#================================================
+#CMD ["bash -il /user/app/dir"]
 CMD bash -il /opt/codefresh/start.sh

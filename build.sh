@@ -10,9 +10,5 @@ RUBYVERSION="$(rbenv install --list | grep "^  $RUBYVERSIONNUMBER" | tail -1)"
 rbenv install $RUBYVERSION --skip-existing
 rbenv local $RUBYVERSION
 
-ruby /opt/codefresh/prepare_project.rb
-/etc/init.d/postgresql start
-
 gem install bundle
 bundle install -j4
-rake db:setup db:migrate
