@@ -3,6 +3,9 @@
 set -e
 cd /usr/app/dir/
 
+/etc/init.d/postgresql start &
+redis-server &
+
 export MONGODB_AUTH="$(date | md5sum | awk '{print $1}')"
 export MONGO_DB="ruby_postgress_example_development"
 export MONGO_URI="mongodb://$CF_USER_NAME:$MONGODB_AUTH@localhost:27017/$MONGO_DB"
@@ -14,7 +17,5 @@ echo "check $(pwd)/mongo_conn.sh for mongo connection environment variables";
 bash -il /opt/codefresh/mongo/launch-mongo.sh
 bash -il /opt/codefresh/mongo/init-mongo.sh
 
-redis-server &
 
-/etc/init.d/postgresql start \
-    && RAILS_ENV=development rails s -b0.0.0.0 -p 8081
+RAILS_ENV=development rails s -b0.0.0.0 -p 8081

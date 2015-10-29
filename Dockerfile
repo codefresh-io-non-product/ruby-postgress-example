@@ -29,6 +29,7 @@ COPY ./ /usr/app/dir/
 RUN \
   mkdir /data/db \
   && /etc/init.d/postgresql start \
+  && sleep 2 \
   && RUBYVERSIONNUMBER="$(bundle platform --ruby | sed 's/ruby//' | sed 's/ //' | sed 's/)//' | sed 's/(//')" \
   && RUBYVERSION="$(rbenv install --list | grep "^  $RUBYVERSIONNUMBER" | tail -1)" \
   && rbenv install $RUBYVERSION --skip-existing \
