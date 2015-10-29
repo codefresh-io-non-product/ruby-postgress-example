@@ -42,7 +42,11 @@ RUN \
 COPY start.sh /opt/codefresh/
 COPY startM.sh /opt/codefresh/
 COPY ./mongo/ /opt/codefresh/mongo/
-RUN chmod +x /opt/codefresh/*.sh
+COPY ./mongo/mongodb.conf /etc/mongodb/
+ENV CF_USER_EMAIL=default
+ENV CF_USER_NAME=default
+RUN \
+  chmod +x /opt/codefresh/*.sh
 
 #================start and expose project===========================
 
